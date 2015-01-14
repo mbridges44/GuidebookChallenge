@@ -19,12 +19,11 @@ databases or other servers, just purley a simple app to get me familiar developi
 
 <h2>Solution</h2>
 <p> I have posted my coded solution here in this Github repo. This challenge was fairly straightforward, and the
-technical choices I made were what I believe to be pretty orthodox in regards to this challenge. I created an Event object and
-a Venue object to store the parsed JSON objects.</p>
+technical choices I made were what I believe to be pretty orthodox in regards to this challenge. </p>
+
 <p> From the beginning, I did my best effort to create this application as maintainable as possible. In my eyes that meant clear code and
-creating methods to do specific tasks. I split up a lot of the HTTP request things into multiple methods in case there are other
-servers in the future that host similar data and that would want to get collected as well. This also made my code a bit more
-clear when the request, string builder, and JSON parsing are in separate methods.</p>
+creating methods to do specific tasks. I split up a lot of the HTTP request and JSON parsing into multiple methods in case in the future there are other
+servers that we would want data from as well. Putting the functionality for the request, string builder, and JSON parsing in separate methods also made my code more clear than having them all in one method.</p>
 <p>Parsing the data to Event objects (I now realize Event might be a poor name for a Java object due to potential collision with Java class) 
 was pretty straightforward. I decided to create a venue class because venue came as an object itself.</p>
 <p>Displaying the names of the Objects was also pretty simple, I just added a refrence to my ListView in my Activity class
