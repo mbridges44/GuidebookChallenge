@@ -5,6 +5,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -25,11 +27,14 @@ import java.net.URISyntaxException;
 
 public class HomeActivity extends ActionBarActivity {
 
+    private LinearLayout linearLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+        linearLayout = (LinearLayout)findViewById(R.id.linearLayout);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -37,6 +42,7 @@ public class HomeActivity extends ActionBarActivity {
         String url = "http://guidebook.com/service/v2/upcomingGuides/";
         JSONArray jsonData = getJSONDataFromServer(url);
         Event[] events =  getArrayOfEventsFromJSONObjects(jsonData);
+        displayEvents(events);
 
     }
 
@@ -46,6 +52,18 @@ public class HomeActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_home, menu);
         return true;
+    }
+
+    //Displays event objects names to the LinearLayout
+    private void displayEvents(Event[] events)
+    {
+        for(int i = 0; i < events.length; i++)
+        {
+            TextView txt = new TextView(this);
+            txt.setLines(2);
+            txt.setText(events[i].getName());
+            linearLayout.addView(txt);
+        }
     }
 
     /*Creates and returns an array of Event objects from the jsonObjects*/
