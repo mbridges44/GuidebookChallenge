@@ -36,7 +36,8 @@ public class HomeActivity extends ActionBarActivity {
 
         String url = "http://guidebook.com/service/v2/upcomingGuides/";
         JSONArray jsonData = getJSONDataFromServer(url);
-        printJSONDataToLog(jsonData);
+        Event[] events =  getArrayOfEventsFromJSONObjects(jsonData);
+
     }
 
 
@@ -45,6 +46,24 @@ public class HomeActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_home, menu);
         return true;
+    }
+
+    /*Creates and returns an array of Event objects from the jsonObjects*/
+    public Event[] getArrayOfEventsFromJSONObjects(JSONArray jsonObjects)
+    {
+        Event[] events = new Event[jsonObjects.length()];
+        try
+        {
+            for(int i = 0; i < jsonObjects.length(); i++)
+            {
+                events[i] = new Event((JSONObject)jsonObjects.get(i));
+            }
+        }
+        catch(JSONException jsonex)
+        {
+            jsonex.printStackTrace();
+        }
+        return events;
     }
 
    /* Returns a JSONArray with the json data sent back from the server at
